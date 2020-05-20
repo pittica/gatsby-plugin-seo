@@ -18,6 +18,9 @@ exports.onCreateNode = ({ node, actions }, options) => {
       twitter: {
         username: ``,
         site: ``
+      },
+      linkedin: {
+        page: ``
       }
     }, options.socials || {})
 

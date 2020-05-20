@@ -47,6 +47,9 @@ module.exports = {
           twitter: {
             username: `TWITTER_USERNAME`,
             site: `TWITTER_SITE_USERNAME`
+          },
+          linkedin: {
+            page: `LINKEDIN_PAGE_USERNAME`
           }
         }
     },
