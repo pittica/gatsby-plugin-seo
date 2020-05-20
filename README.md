@@ -42,11 +42,11 @@ module.exports = {
           },
           facebook: {
             page: `FACEBOOK_PAGE_USERNAME`,
-			      app: `FACEBOOK_APP_ID`
+            app: `FACEBOOK_APP_ID`
           },
           twitter: {
             username: `TWITTER_USERNAME`,
-			      site: `TWITTER_SITE_USERNAME`
+            site: `TWITTER_SITE_USERNAME`
           }
         }
     },
