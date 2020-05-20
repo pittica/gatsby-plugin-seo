@@ -5,9 +5,9 @@ import PropTypes from "prop-types"
 import { OpenGraph, TwitterCard, SchemaOrg } from "@pittica/gatsby-plugin-seo"
 
 const SEO = ({ postData, frontmatter, image, isBlogPost, title, path }) => {
-  const { site } = useStaticQuery(
+  const { site, siteBuildMetadata } = useStaticQuery(
     graphql`
-      query RemarkQuery {
+      query {
         site {
           siteMetadata {
             title
@@ -21,6 +21,13 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path }) => {
               company
               url
               logo
+            }
+          }
+        }
+        siteBuildMetadata {
+          fields {
+            seo {
+              image
             }
           }
         }
@@ -38,7 +45,7 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path }) => {
   const description = postMeta.description || site.siteMetadata.description
   const postImage = image
     ? `${siteUrl}/${image.replace(/^\//, "")}`
-    : `${siteUrl}/${site.siteMetadata.seo.image.replace(/^\//, "")}`
+    : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, "")}`
   const url = `${siteUrl}${path}`
   const datePublished = isBlogPost ? postMeta.datePublished : false
 
