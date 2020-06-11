@@ -46,7 +46,7 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path }) => {
   const postImage = image
     ? `${siteUrl}/${image.replace(/^\//, "")}`
     : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, "")}`
-  const url = `${siteUrl}${path}`
+  const url = path ? `${siteUrl}${path}` : siteUrl
   const datePublished = isBlogPost ? postMeta.datePublished : false
 
   return (
