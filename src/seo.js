@@ -42,7 +42,7 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
     : postMeta.title
       ? postMeta.title
       : site.siteMetadata.title
-  const description = description || postMeta.description || site.siteMetadata.description
+  const postDescription = description || postMeta.description || site.siteMetadata.description
   const postImage = image
     ? `${siteUrl}/${image.replace(/^\//, "")}`
     : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, "")}`
@@ -58,18 +58,18 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
         title={postTitle}
         titleTemplate={title ? `%s | ${site.siteMetadata.title}` : site.siteMetadata.title}
       >
-        <meta name="description" content={description} />
+        <meta name="description" content={postDescription} />
         <meta name="image" content={postImage} />
         <link rel="canonical" href={url} />
       </Helmet>
-      <OpenGraph url={url} article={isBlogPost} title={postTitle} description={description} image={postImage} />
-      <TwitterCard title={postTitle} description={description} image={postImage} />
+      <OpenGraph url={url} article={isBlogPost} title={postTitle} description={postDescription} image={postImage} />
+      <TwitterCard title={postTitle} description={postDescription} image={postImage} />
       <SchemaOrg
         isBlogPost={isBlogPost}
         url={url}
         title={postTitle}
         image={postImage}
-        description={description}
+        description={postDescription}
         datePublished={datePublished}
         siteUrl={site.siteMetadata.siteUrl}
         author={site.siteMetadata.author}
