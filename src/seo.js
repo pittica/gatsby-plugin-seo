@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
 import { OpenGraph, TwitterCard, SchemaOrg } from "@pittica/gatsby-plugin-seo"
 
-const SEO = ({ postData, frontmatter, image, isBlogPost, title, path }) => {
+const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, description }) => {
   const { site, siteBuildMetadata } = useStaticQuery(
     graphql`
       query {
@@ -42,7 +42,7 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path }) => {
     : postMeta.title
       ? postMeta.title
       : site.siteMetadata.title
-  const description = postMeta.description || site.siteMetadata.description
+  const description = description || postMeta.description || site.siteMetadata.description
   const postImage = image
     ? `${siteUrl}/${image.replace(/^\//, "")}`
     : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, "")}`
