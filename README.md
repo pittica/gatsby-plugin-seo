@@ -52,6 +52,7 @@ module.exports = {
             page: `LINKEDIN_PAGE_USERNAME`
           }
         }
+      }
     },
   ],
 }
