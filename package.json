@@ -2,7 +2,7 @@
   "name": "@pittica/gatsby-plugin-seo",
   "private": false,
   "description": "SEO optimization plugin for GatsbyJS.",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "author": {
     "name": "Lucio Benini",
     "email": "info@pittica.com",
@@ -13,12 +13,7 @@
   },
   "deprecated": false,
   "homepage": "https://github.com/pittica/gatsby-plugin-seo",
-  "keywords": [
-    "gatsby",
-    "gatsby-plugin",
-    "seo",
-    "social-networks"
-  ],
+  "keywords": [ "gatsby", "gatsby-plugin", "seo", "social-networks" ],
   "dependencies": {
     "prop-types": "^15.7.2",
     "gatsby-plugin-react-helmet": "^3.3.1"

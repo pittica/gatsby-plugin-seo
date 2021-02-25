@@ -1,28 +1,31 @@
-const loadsh = require(`lodash`)
+const loadsh = require(`lodash`);
 
 exports.onCreateNode = ({ node, actions }, options) => {
-  const { createNodeField } = actions
+  const { createNodeField } = actions;
 
   if (node.id === `SiteBuildMetadata`) {
-    const socials = loadsh.merge({
-      instagram: {
-        username: ``
+    const socials = loadsh.merge(
+      {
+        instagram: {
+          username: ``
+        },
+        github: {
+          username: ``
+        },
+        facebook: {
+          page: ``,
+          app: ``
+        },
+        twitter: {
+          username: ``,
+          site: ``
+        },
+        linkedin: {
+          page: ``
+        }
       },
-      github: {
-        username: ``
-      },
-      facebook: {
-        page: ``,
-        app: ``
-      },
-      twitter: {
-        username: ``,
-        site: ``
-      },
-      linkedin: {
-        page: ``
-      }
-    }, options.socials || {})
+      options.socials || {}
+    );
 
     createNodeField({
       name: `seo`,
@@ -31,6 +34,6 @@ exports.onCreateNode = ({ node, actions }, options) => {
         image: options.image,
         socials
       }
-    })
+    });
   }
-}
+};

@@ -1,14 +1,15 @@
-import React from "react"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
-import PropTypes from "prop-types"
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 
 const OpenGraph = ({ url, title, article, description, image }) => {
-  const data = useStaticQuery(
+  const { site: { siteMetadata }, siteBuildMetadata } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
+            title
             locale {
               language
               culture
@@ -29,8 +30,8 @@ const OpenGraph = ({ url, title, article, description, image }) => {
         }
       }
     `
-  )
-  const facebook = data.siteBuildMetadata.fields.seo.socials.facebook
+  );
+  const facebook = siteBuildMetadata.fields.seo.socials.facebook;
 
   return (
     <Helmet>
@@ -39,27 +40,18 @@ const OpenGraph = ({ url, title, article, description, image }) => {
       <meta property="og:title" content={title} />
       <meta
         property="og:locale"
-        content={[
-          data.site.siteMetadata.locale.language.toLowerCase(),
-          data.site.siteMetadata.locale.culture.toUpperCase()
-        ].join("_")}
+        content={[ siteMetadata.locale.language.toLowerCase(), siteMetadata.locale.culture.toUpperCase() ].join('_')}
       />
       <meta property="og:description" content={description} />
-      {image ? (
-        <meta property="og:image" content={image} />
-      ) : null}
-      {facebook.app ? (
-        <meta property="fb:app_id" content={facebook.app} />
-      ) : null}
+      <meta property="og:site_name" content={siteMetadata.title} />
+      {image ? <meta property="og:image" content={image} /> : null}
+      {facebook.app ? <meta property="fb:app_id" content={facebook.app} /> : null}
       {article && facebook.page ? (
-        <meta
-          property="article:publisher"
-          content={"https://www.facebook.com/" + facebook.page}
-        />
+        <meta property="article:publisher" content={'https://www.facebook.com/' + facebook.page} />
       ) : null}
     </Helmet>
-  )
-}
+  );
+};
 
 OpenGraph.propTypes = {
   url: PropTypes.string,
@@ -67,7 +59,7 @@ OpenGraph.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired
-}
+};
 
 OpenGraph.defaultProps = {
   url: null,
@@ -75,6 +67,6 @@ OpenGraph.defaultProps = {
   image: null,
   title: null,
   description: null
-}
+};
 
-export default OpenGraph
+export default OpenGraph;

@@ -1,11 +1,11 @@
-import React, { Fragment } from "react"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
-import PropTypes from "prop-types"
-import { OpenGraph, TwitterCard, SchemaOrg } from "@pittica/gatsby-plugin-seo"
+import React, { Fragment } from 'react';
+import { Helmet } from 'react-helmet';
+import { useStaticQuery, graphql } from 'gatsby';
+import PropTypes from 'prop-types';
+import { OpenGraph, TwitterCard, SchemaOrg } from '@pittica/gatsby-plugin-seo';
 
-const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, description }) => {
-  const { site, siteBuildMetadata } = useStaticQuery(
+const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, description, keywords, author }) => {
+  const { site: { siteMetadata }, siteBuildMetadata } = useStaticQuery(
     graphql`
       query {
         site {
@@ -33,32 +33,29 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
         }
       }
     `
-  )
+  );
 
-  const siteUrl = site.siteMetadata.siteUrl.replace(/\/$/, "")
-  const postMeta = frontmatter || postData.frontmatter || {}
-  const postTitle = title
-    ? title
-    : postMeta.title
-      ? postMeta.title
-      : site.siteMetadata.title
-  const postDescription = description || postMeta.description || site.siteMetadata.description
+  const siteUrl = siteMetadata.siteUrl.replace(/\/$/, '');
+  const postMeta = frontmatter || postData.frontmatter || {};
+  const postTitle = title ? title : postMeta.title ? postMeta.title : siteMetadata.title;
+  const postDescription = description || postMeta.description || siteMetadata.description;
   const postImage = image
-    ? `${siteUrl}/${image.replace(/^\//, "")}`
-    : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, "")}`
-  const url = path ? `${siteUrl}${path}` : siteUrl
-  const datePublished = isBlogPost ? postMeta.datePublished : false
+    ? `${siteUrl}/${image.replace(/^\//, '')}`
+    : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, '')}`;
+  const url = path ? new URL(path, siteUrl).href : siteUrl;
+  const datePublished = isBlogPost ? postMeta.datePublished : false;
 
   return (
     <Fragment>
       <Helmet
         htmlAttributes={{
-          lang: site.siteMetadata.locale.language
+          lang: siteMetadata.locale.language
         }}
         title={postTitle}
-        titleTemplate={title ? `%s | ${site.siteMetadata.title}` : site.siteMetadata.title}
+        titleTemplate={title ? `%s | ${siteMetadata.title}` : siteMetadata.title}
       >
         <meta name="description" content={postDescription} />
+        {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
         <meta name="image" content={postImage} />
         <link rel="canonical" href={url} />
       </Helmet>
@@ -71,14 +68,14 @@ const SEO = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
         image={postImage}
         description={postDescription}
         datePublished={datePublished}
-        siteUrl={site.siteMetadata.siteUrl}
-        author={site.siteMetadata.author}
-        organization={site.siteMetadata.organization}
-        defaultTitle={site.siteMetadata.title}
+        siteUrl={siteMetadata.siteUrl}
+        author={author || siteMetadata.author}
+        organization={siteMetadata.organization}
+        defaultTitle={siteMetadata.title}
       />
     </Fragment>
-  )
-}
+  );
+};
 
 SEO.propTypes = {
   isBlogPost: PropTypes.bool,
@@ -90,13 +87,13 @@ SEO.propTypes = {
   }),
   image: PropTypes.string,
   title: PropTypes.string
-}
+};
 
 SEO.defaultProps = {
   isBlogPost: false,
   postData: { childMarkdownRemark: {} },
   image: null,
   title: null
-}
+};
 
-export default SEO
+export default SEO;
