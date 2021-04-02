@@ -33,6 +33,5 @@ exports.onCreateNode = ({ node, actions: { createNodeField } }, { socials, image
         socials
       }
     });
-    console.log(node.fields.seo.socials);
   }
 };
