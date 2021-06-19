@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import { formatLocale, joinLocale } from './utils/locale';
 
 const OpenGraph = ({ url, title, article, description, image, locale }) => {
-  const { site: { siteMetadata }, siteBuildMetadata } = useStaticQuery(
+  const {
+    site: { siteMetadata },
+    sitePlugin: { pluginOptions: { socials: { facebook: { app, page } } } }
+  } = useStaticQuery(
     graphql`
       query {
         site {
@@ -17,14 +20,12 @@ const OpenGraph = ({ url, title, article, description, image, locale }) => {
             }
           }
         }
-        siteBuildMetadata {
-          fields {
-            seo {
-              socials {
-                facebook {
-                  page
-                  app
-                }
+        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
+          pluginOptions {
+            socials {
+              facebook {
+                app
+                page
               }
             }
           }
@@ -32,7 +33,6 @@ const OpenGraph = ({ url, title, article, description, image, locale }) => {
       }
     `
   );
-  const { app, page } = siteBuildMetadata.fields.seo.socials.facebook;
   const localeContent = locale ? formatLocale(locale) : siteMetadata.locale;
 
   return (

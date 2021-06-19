@@ -4,17 +4,15 @@ import { useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 
 const TwitterCard = ({ title, description, image }) => {
-  const { siteBuildMetadata } = useStaticQuery(
+  const { sitePlugin: { pluginOptions: { socials: { twitter: { site, username } } } } } = useStaticQuery(
     graphql`
       query {
-        siteBuildMetadata {
-          fields {
-            seo {
-              socials {
-                twitter {
-                  username
-                  site
-                }
+        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
+          pluginOptions {
+            socials {
+              twitter {
+                site
+                username
               }
             }
           }
@@ -22,8 +20,6 @@ const TwitterCard = ({ title, description, image }) => {
       }
     `
   );
-
-  const { username, site } = siteBuildMetadata.fields.seo.socials.twitter;
 
   return (
     <Helmet>

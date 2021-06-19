@@ -35,21 +35,31 @@ module.exports = {
         image: `/DEFAULT_SHARING_IMAGE.jpg`,
         socials: {
           instagram: {
-            username: `INSTAGRAM_USERNAME`
+            username: `INSTAGRAM_USERNAME`,
+            icon: `instagram-icon-class`,
+            socialFollow: true
           },
           github: {
-            username: `GITHUB_USERNAME`
+            username: `GITHUB_USERNAME`,
+            icon: `github-icon-class`,
+            socialFollow: true
           },
           facebook: {
             page: `FACEBOOK_PAGE_USERNAME`,
-            app: `FACEBOOK_APP_ID`
+            app: `FACEBOOK_APP_ID`,
+            icon: `facebook-icon-class`,
+            socialFollow: true
           },
           twitter: {
             username: `TWITTER_USERNAME`,
-            site: `TWITTER_SITE_USERNAME`
+            site: `TWITTER_SITE_USERNAME`,
+            icon: `twitter-icon-class`,
+            socialFollow: true
           },
           linkedin: {
-            page: `LINKEDIN_PAGE_USERNAME`
+            page: `LINKEDIN_PAGE_USERNAME`,
+            icon: `linkedin-icon-class`,
+            socialFollow: true
           }
         }
       }

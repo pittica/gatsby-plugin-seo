@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { OpenGraph, TwitterCard, SchemaOrg } from '@pittica/gatsby-plugin-seo';
 
 const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, description, keywords, author, locale }) => {
-  const { site: { siteMetadata }, siteBuildMetadata } = useStaticQuery(
+  const { site: { siteMetadata }, sitePlugin: { pluginOptions } } = useStaticQuery(
     graphql`
       query {
         site {
@@ -25,11 +25,9 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
             }
           }
         }
-        siteBuildMetadata {
-          fields {
-            seo {
-              image
-            }
+        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
+          pluginOptions {
+            image
           }
         }
       }
@@ -42,7 +40,7 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
   const postDescription = description || postMeta.description || siteMetadata.description;
   const postImage = image
     ? `${siteUrl}/${image.replace(/^\//, '')}`
-    : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, '')}`;
+    : `${siteUrl}/${pluginOptions.image.replace(/^\//, '')}`;
   const url = path ? new URL(path, siteUrl).href : siteUrl;
   const datePublished = isBlogPost ? postMeta.datePublished : false;
   const postLocale = locale ? locale : siteMetadata.locale;
