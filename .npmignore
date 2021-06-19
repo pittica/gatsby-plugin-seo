@@ -9,4 +9,5 @@ coverage
 decls
 examples
 .gitattributes
+.github
 gatsby-plugin-seo.code-workspace

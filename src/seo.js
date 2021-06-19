@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { OpenGraph, TwitterCard, SchemaOrg } from '@pittica/gatsby-plugin-seo';
 
-const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, description, keywords, author }) => {
+const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, description, keywords, author, locale }) => {
   const { site: { siteMetadata }, siteBuildMetadata } = useStaticQuery(
     graphql`
       query {
@@ -15,6 +15,7 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
             siteUrl
             locale {
               language
+              culture
             }
             author
             organization {
@@ -44,12 +45,13 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
     : `${siteUrl}/${siteBuildMetadata.fields.seo.image.replace(/^\//, '')}`;
   const url = path ? new URL(path, siteUrl).href : siteUrl;
   const datePublished = isBlogPost ? postMeta.datePublished : false;
+  const postLocale = locale ? locale : siteMetadata.locale;
 
   return (
     <Fragment>
       <Helmet
         htmlAttributes={{
-          lang: siteMetadata.locale.language
+          lang: postLocale.language
         }}
         title={postTitle}
         titleTemplate={title ? `%s | ${siteMetadata.title}` : siteMetadata.title}
@@ -59,7 +61,14 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
         <meta name="image" content={postImage} />
         <link rel="canonical" href={url} />
       </Helmet>
-      <OpenGraph url={url} article={isBlogPost} title={postTitle} description={postDescription} image={postImage} />
+      <OpenGraph
+        url={url}
+        article={isBlogPost}
+        title={postTitle}
+        description={postDescription}
+        image={postImage}
+        locale={postLocale}
+      />
       <TwitterCard title={postTitle} description={postDescription} image={postImage} />
       <SchemaOrg
         isBlogPost={isBlogPost}
@@ -86,7 +95,8 @@ Seo.propTypes = {
     })
   }),
   image: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  locale: PropTypes.any
 };
 
 Seo.defaultProps = {

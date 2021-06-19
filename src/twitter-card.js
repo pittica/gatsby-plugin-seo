@@ -23,7 +23,7 @@ const TwitterCard = ({ title, description, image }) => {
     `
   );
 
-  const twitter = siteBuildMetadata.fields.seo.socials.twitter;
+  const { username, site } = siteBuildMetadata.fields.seo.socials.twitter;
 
   return (
     <Helmet>
@@ -31,8 +31,8 @@ const TwitterCard = ({ title, description, image }) => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       {image ? <meta name="twitter:image" content={image} /> : null}
-      {twitter.site ? <meta name="twitter:site" content={twitter.site} /> : null}
-      {twitter.creator ? <meta name="twitter:creator" content={twitter.creator} /> : null}
+      {site ? <meta name="twitter:site" content={site} /> : null}
+      {username ? <meta name="twitter:creator" content={username} /> : null}
     </Helmet>
   );
 };
