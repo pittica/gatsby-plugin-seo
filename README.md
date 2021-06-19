@@ -37,29 +37,29 @@ module.exports = {
           instagram: {
             username: `INSTAGRAM_USERNAME`,
             icon: `instagram-icon-class`,
-            socialFollow: true
+            show: true
           },
           github: {
             username: `GITHUB_USERNAME`,
             icon: `github-icon-class`,
-            socialFollow: true
+            show: true
           },
           facebook: {
             page: `FACEBOOK_PAGE_USERNAME`,
             app: `FACEBOOK_APP_ID`,
             icon: `facebook-icon-class`,
-            socialFollow: true
+            show: true
           },
           twitter: {
             username: `TWITTER_USERNAME`,
             site: `TWITTER_SITE_USERNAME`,
             icon: `twitter-icon-class`,
-            socialFollow: true
+            show: true
           },
           linkedin: {
             page: `LINKEDIN_PAGE_USERNAME`,
             icon: `linkedin-icon-class`,
-            socialFollow: true
+            show: true
           }
         }
       }
