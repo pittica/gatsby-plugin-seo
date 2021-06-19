@@ -13,7 +13,12 @@
   },
   "deprecated": false,
   "homepage": "https://github.com/pittica/gatsby-plugin-seo",
-  "keywords": [ "gatsby", "gatsby-plugin", "seo", "social-networks" ],
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "seo",
+    "social-networks"
+  ],
   "dependencies": {
     "prop-types": "^15.7.2",
     "gatsby-plugin-react-helmet": "^3.3.1"
