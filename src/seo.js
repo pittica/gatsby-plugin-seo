@@ -2,7 +2,9 @@ import React, { Fragment } from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import { OpenGraph, TwitterCard, SchemaOrg } from '@pittica/gatsby-plugin-seo';
+import { OpenGraph } from './open-graph';
+import { TwitterCard } from './twitter-card';
+import { SchemaOrg } from './schema-org';
 
 const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, description, keywords, author, locale }) => {
   const { site: { siteMetadata }, sitePlugin: { pluginOptions } } = useStaticQuery(

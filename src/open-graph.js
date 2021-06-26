@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 import PropTypes from 'prop-types';
-import { formatLocale, joinLocale } from './utils/locale';
+import { formatLocale, joinLocale } from '@pittica/gatsby-plugin-utils';
 
 const OpenGraph = ({ url, title, article, description, image, locale }) => {
   const {
