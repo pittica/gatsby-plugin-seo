@@ -1,13 +1,27 @@
-import React, { Fragment } from 'react';
-import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
-import { OpenGraph } from './open-graph';
-import { TwitterCard } from './twitter-card';
-import { SchemaOrg } from './schema-org';
+import React, { Fragment } from "react";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
+import PropTypes from "prop-types";
+import OpenGraph from "./open-graph";
+import TwitterCard from "./twitter-card";
+import SchemaOrg from "./schema-org";
 
-const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, description, keywords, author, locale }) => {
-  const { site: { siteMetadata }, sitePlugin: { pluginOptions } } = useStaticQuery(
+const Seo = ({
+  postData,
+  frontmatter,
+  image,
+  isBlogPost,
+  title,
+  path,
+  description,
+  keywords,
+  author,
+  locale,
+}) => {
+  const {
+    site: { siteMetadata },
+    sitePlugin: { pluginOptions },
+  } = useStaticQuery(
     graphql`
       query {
         site {
@@ -36,13 +50,18 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
     `
   );
 
-  const siteUrl = siteMetadata.siteUrl.replace(/\/$/, '');
+  const siteUrl = siteMetadata.siteUrl.replace(/\/$/, "");
   const postMeta = frontmatter || postData.frontmatter || {};
-  const postTitle = title ? title : postMeta.title ? postMeta.title : siteMetadata.title;
-  const postDescription = description || postMeta.description || siteMetadata.description;
+  const postTitle = title
+    ? title
+    : postMeta.title
+    ? postMeta.title
+    : siteMetadata.title;
+  const postDescription =
+    description || postMeta.description || siteMetadata.description;
   const postImage = image
-    ? `${siteUrl}/${image.replace(/^\//, '')}`
-    : `${siteUrl}/${pluginOptions.image.replace(/^\//, '')}`;
+    ? `${siteUrl}/${image.replace(/^\//, "")}`
+    : `${siteUrl}/${pluginOptions.image.replace(/^\//, "")}`;
   const url = path ? new URL(path, siteUrl).href : siteUrl;
   const datePublished = isBlogPost ? postMeta.datePublished : false;
   const postLocale = locale ? locale : siteMetadata.locale;
@@ -51,13 +70,17 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
     <Fragment>
       <Helmet
         htmlAttributes={{
-          lang: postLocale.language
+          lang: postLocale.language,
         }}
         title={postTitle}
-        titleTemplate={title ? `%s | ${siteMetadata.title}` : siteMetadata.title}
+        titleTemplate={
+          title ? `%s | ${siteMetadata.title}` : siteMetadata.title
+        }
       >
         <meta name="description" content={postDescription} />
-        {keywords && keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
+        {keywords && keywords.length > 0 && (
+          <meta name="keywords" content={keywords.join(", ")} />
+        )}
         <meta name="image" content={postImage} />
         <link rel="canonical" href={url} />
       </Helmet>
@@ -69,7 +92,11 @@ const Seo = ({ postData, frontmatter, image, isBlogPost, title, path, descriptio
         image={postImage}
         locale={postLocale}
       />
-      <TwitterCard title={postTitle} description={postDescription} image={postImage} />
+      <TwitterCard
+        title={postTitle}
+        description={postDescription}
+        image={postImage}
+      />
       <SchemaOrg
         isBlogPost={isBlogPost}
         url={url}
@@ -91,19 +118,19 @@ Seo.propTypes = {
   postData: PropTypes.shape({
     childMarkdownRemark: PropTypes.shape({
       frontmatter: PropTypes.any,
-      excerpt: PropTypes.any
-    })
+      excerpt: PropTypes.any,
+    }),
   }),
   image: PropTypes.string,
   title: PropTypes.string,
-  locale: PropTypes.any
+  locale: PropTypes.any,
 };
 
 Seo.defaultProps = {
   isBlogPost: false,
   postData: { childMarkdownRemark: {} },
   image: null,
-  title: null
+  title: null,
 };
 
 export default Seo;
