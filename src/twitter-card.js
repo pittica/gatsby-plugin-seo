@@ -1,10 +1,18 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
+import PropTypes from "prop-types";
 
 const TwitterCard = ({ title, description, image }) => {
-  const { sitePlugin: { pluginOptions: { socials: { twitter: { site, username } } } } } = useStaticQuery(
+  const {
+    sitePlugin: {
+      pluginOptions: {
+        socials: {
+          twitter: { site, username },
+        },
+      },
+    },
+  } = useStaticQuery(
     graphql`
       query {
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
@@ -36,13 +44,13 @@ const TwitterCard = ({ title, description, image }) => {
 TwitterCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  image: PropTypes.string
+  image: PropTypes.string,
 };
 
 TwitterCard.defaultProps = {
   title: null,
   description: null,
-  image: null
+  image: null,
 };
 
 export default TwitterCard;

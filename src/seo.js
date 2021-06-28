@@ -6,7 +6,7 @@ import OpenGraph from "./open-graph";
 import TwitterCard from "./twitter-card";
 import SchemaOrg from "./schema-org";
 
-const Seo = ({
+export default function Seo({
   postData,
   frontmatter,
   image,
@@ -17,7 +17,7 @@ const Seo = ({
   keywords,
   author,
   locale,
-}) => {
+}) {
   const {
     site: { siteMetadata },
     sitePlugin: { pluginOptions },
@@ -111,7 +111,7 @@ const Seo = ({
       />
     </Fragment>
   );
-};
+}
 
 Seo.propTypes = {
   isBlogPost: PropTypes.bool,
@@ -132,5 +132,3 @@ Seo.defaultProps = {
   image: null,
   title: null,
 };
-
-export default Seo;

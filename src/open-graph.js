@@ -1,13 +1,26 @@
-import React from 'react';
-import { Helmet } from 'react-helmet';
-import { useStaticQuery, graphql } from 'gatsby';
-import PropTypes from 'prop-types';
-import { formatLocale, joinLocale } from '@pittica/gatsby-plugin-utils';
+import React from "react";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
+import PropTypes from "prop-types";
+import { formatLocale, joinLocale } from "@pittica/gatsby-plugin-utils";
 
-const OpenGraph = ({ url, title, article, description, image, locale }) => {
+export default function OpenGraph({
+  url,
+  title,
+  article,
+  description,
+  image,
+  locale,
+}) {
   const {
     site: { siteMetadata },
-    sitePlugin: { pluginOptions: { socials: { facebook: { app, page } } } }
+    sitePlugin: {
+      pluginOptions: {
+        socials: {
+          facebook: { app, page },
+        },
+      },
+    },
   } = useStaticQuery(
     graphql`
       query {
@@ -45,10 +58,15 @@ const OpenGraph = ({ url, title, article, description, image, locale }) => {
       <meta property="og:site_name" content={siteMetadata.title} />
       {image ? <meta property="og:image" content={image} /> : null}
       {app ? <meta property="fb:app_id" content={app} /> : null}
-      {article && page ? <meta property="article:publisher" content={'https://www.facebook.com/' + page} /> : null}
+      {article && page ? (
+        <meta
+          property="article:publisher"
+          content={"https://www.facebook.com/" + page}
+        />
+      ) : null}
     </Helmet>
   );
-};
+}
 
 OpenGraph.propTypes = {
   url: PropTypes.string,
@@ -56,7 +74,7 @@ OpenGraph.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  locale: PropTypes.any
+  locale: PropTypes.any,
 };
 
 OpenGraph.defaultProps = {
@@ -64,7 +82,5 @@ OpenGraph.defaultProps = {
   article: false,
   image: null,
   title: null,
-  description: null
+  description: null,
 };
-
-export default OpenGraph;
