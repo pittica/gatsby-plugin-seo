@@ -1,8 +1,8 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
-import { formatLocale, joinLocale } from "@pittica/gatsby-plugin-utils";
+import React from "react"
+import { Helmet } from "react-helmet"
+import { useStaticQuery, graphql } from "gatsby"
+import PropTypes from "prop-types"
+import { formatLocale, joinLocale } from "@pittica/gatsby-plugin-utils"
 
 export default function OpenGraph({
   url,
@@ -45,8 +45,8 @@ export default function OpenGraph({
         }
       }
     `
-  );
-  const localeContent = locale ? formatLocale(locale) : siteMetadata.locale;
+  )
+  const localeContent = locale ? formatLocale(locale) : siteMetadata.locale
 
   return (
     <Helmet>
@@ -65,7 +65,7 @@ export default function OpenGraph({
         />
       ) : null}
     </Helmet>
-  );
+  )
 }
 
 OpenGraph.propTypes = {
@@ -75,7 +75,7 @@ OpenGraph.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   locale: PropTypes.any,
-};
+}
 
 OpenGraph.defaultProps = {
   url: null,
@@ -83,4 +83,4 @@ OpenGraph.defaultProps = {
   image: null,
   title: null,
   description: null,
-};
+}

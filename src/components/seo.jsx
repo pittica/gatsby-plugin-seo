@@ -1,10 +1,11 @@
-import React, { Fragment } from "react";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
-import OpenGraph from "./open-graph";
-import TwitterCard from "./twitter-card";
-import SchemaOrg from "./schema-org";
+import React, { Fragment } from "react"
+import { Helmet } from "react-helmet"
+import { useStaticQuery, graphql } from "gatsby"
+import PropTypes from "prop-types"
+
+import OpenGraph from "./open-graph"
+import TwitterCard from "./twitter-card"
+import SchemaOrg from "./schema-org"
 
 export default function Seo({
   postData,
@@ -48,23 +49,23 @@ export default function Seo({
         }
       }
     `
-  );
+  )
 
-  const siteUrl = siteMetadata.siteUrl.replace(/\/$/, "");
-  const postMeta = frontmatter || postData.frontmatter || {};
+  const siteUrl = siteMetadata.siteUrl.replace(/\/$/, "")
+  const postMeta = frontmatter || postData.frontmatter || {}
   const postTitle = title
     ? title
     : postMeta.title
     ? postMeta.title
-    : siteMetadata.title;
+    : siteMetadata.title
   const postDescription =
-    description || postMeta.description || siteMetadata.description;
+    description || postMeta.description || siteMetadata.description
   const postImage = image
     ? `${siteUrl}/${image.replace(/^\//, "")}`
-    : `${siteUrl}/${pluginOptions.image.replace(/^\//, "")}`;
-  const url = path ? new URL(path, siteUrl).href : siteUrl;
-  const datePublished = isBlogPost ? postMeta.datePublished : false;
-  const postLocale = locale ? locale : siteMetadata.locale;
+    : `${siteUrl}/${pluginOptions.image.replace(/^\//, "")}`
+  const url = path ? new URL(path, siteUrl).href : siteUrl
+  const datePublished = isBlogPost ? postMeta.datePublished : false
+  const postLocale = locale ? locale : siteMetadata.locale
 
   return (
     <Fragment>
@@ -110,7 +111,7 @@ export default function Seo({
         defaultTitle={siteMetadata.title}
       />
     </Fragment>
-  );
+  )
 }
 
 Seo.propTypes = {
@@ -124,11 +125,11 @@ Seo.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   locale: PropTypes.any,
-};
+}
 
 Seo.defaultProps = {
   isBlogPost: false,
   postData: { childMarkdownRemark: {} },
   image: null,
   title: null,
-};
+}

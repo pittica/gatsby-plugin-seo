@@ -1,17 +1,8 @@
-import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
+import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import PropTypes from "prop-types"
 
-function SocialLink({ name, icon, url, page }) {
-  return (
-    <li>
-      <a href={new URL(page, url).href} title={name}>
-        <i className={icon} />
-        <span>{name}</span>
-      </a>
-    </li>
-  );
-}
+import SocialLink from "./social-link"
 
 export default function SocialFollow({ className }) {
   const {
@@ -56,7 +47,7 @@ export default function SocialFollow({ className }) {
         }
       }
     `
-  );
+  )
 
   return (
     <div className={className}>
@@ -103,9 +94,9 @@ export default function SocialFollow({ className }) {
         )}
       </ul>
     </div>
-  );
+  )
 }
 
 SocialFollow.propTypes = {
   className: PropTypes.string,
-};
+}

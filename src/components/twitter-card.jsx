@@ -1,9 +1,9 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { useStaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
+import { useStaticQuery, graphql } from "gatsby"
+import { Helmet } from "react-helmet"
 
-const TwitterCard = ({ title, description, image }) => {
+export default function TwitterCard({ title, description, image }) {
   const {
     sitePlugin: {
       pluginOptions: {
@@ -27,7 +27,7 @@ const TwitterCard = ({ title, description, image }) => {
         }
       }
     `
-  );
+  )
 
   return (
     <Helmet>
@@ -38,19 +38,17 @@ const TwitterCard = ({ title, description, image }) => {
       {site ? <meta name="twitter:site" content={site} /> : null}
       {username ? <meta name="twitter:creator" content={username} /> : null}
     </Helmet>
-  );
-};
+  )
+}
 
 TwitterCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   image: PropTypes.string,
-};
+}
 
 TwitterCard.defaultProps = {
   title: null,
   description: null,
   image: null,
-};
-
-export default TwitterCard;
+}

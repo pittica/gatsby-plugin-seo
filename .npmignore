@@ -11,3 +11,6 @@ examples
 .gitattributes
 .github
 gatsby-plugin-seo.code-workspace
+.prettierignore
+.prettierrc
+src
