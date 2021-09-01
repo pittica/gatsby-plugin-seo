@@ -2,7 +2,7 @@
   "name": "@pittica/gatsby-plugin-seo",
   "private": false,
   "description": "SEO optimization plugin for GatsbyJS.",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "author": {
     "name": "Lucio Benini",
     "email": "info@pittica.com",
@@ -27,24 +27,15 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
-  "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "babel-preset-gatsby-package": "^1.12.0",
-    "react-scripts": "^4.0.3"
-  },
   "license": "MIT",
-  "source": "src/index.js",
-  "main": "dist/index.js",
+  "source": "index.jsx",
+  "main": "index.jsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pittica/gatsby-plugin-seo.git"
   },
   "config": {
     "access": "public"
-  },
-  "scripts": {
-    "test": "react-scripts test",
-    "prepare": "rimraf ./dist && mkdirp ./dist && babel src --out-dir dist --copy-files"
   },
   "eslintConfig": {
     "extends": "react-app"
