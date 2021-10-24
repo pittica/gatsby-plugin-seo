@@ -23,7 +23,7 @@ export default function OpenGraph({
     },
   } = useStaticQuery(
     graphql`
-      query {
+      query OpenGraph {
         site {
           siteMetadata {
             title
@@ -34,14 +34,7 @@ export default function OpenGraph({
           }
         }
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions {
-            socials {
-              facebook {
-                app
-                page
-              }
-            }
-          }
+          pluginOptions
         }
       }
     `

@@ -24,7 +24,7 @@ export default function Seo({
     sitePlugin: { pluginOptions },
   } = useStaticQuery(
     graphql`
-      query {
+      query Seo {
         site {
           siteMetadata {
             title

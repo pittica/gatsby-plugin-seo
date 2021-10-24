@@ -14,7 +14,7 @@ export default function TwitterCard({ title, description, image }) {
     },
   } = useStaticQuery(
     graphql`
-      query {
+      query TwitterCard {
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
           pluginOptions
         }

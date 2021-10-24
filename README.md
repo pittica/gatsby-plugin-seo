@@ -13,6 +13,7 @@ SEO plugin for [GatsbyJS](https://www.gatsbyjs.org/).
 ## Install
 
 [![npm](https://img.shields.io/npm/v/@pittica/gatsby-plugin-seo)](https://www.npmjs.com/package/@pittica/gatsby-plugin-seo)
+[![npm](https://img.shields.io/npm/dm/@pittica/gatsby-plugin-seo)](https://www.npmjs.com/package/@pittica/gatsby-plugin-seo)
 
 ```shell
 npm install @pittica/gatsby-plugin-seo

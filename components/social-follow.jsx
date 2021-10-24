@@ -13,37 +13,9 @@ export default function SocialFollow({ className }) {
     },
   } = useStaticQuery(
     graphql`
-      query {
+      query SocialFollow {
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions {
-            socials {
-              facebook {
-                page
-                icon
-                show
-              }
-              github {
-                username
-                icon
-                show
-              }
-              instagram {
-                username
-                icon
-                show
-              }
-              linkedin {
-                page
-                icon
-                show
-              }
-              twitter {
-                username
-                icon
-                show
-              }
-            }
-          }
+          pluginOptions
         }
       }
     `
