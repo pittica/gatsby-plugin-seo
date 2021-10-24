@@ -16,14 +16,7 @@ export default function TwitterCard({ title, description, image }) {
     graphql`
       query {
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions {
-            socials {
-              twitter {
-                site
-                username
-              }
-            }
-          }
+          pluginOptions
         }
       }
     `

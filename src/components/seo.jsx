@@ -43,9 +43,7 @@ export default function Seo({
           }
         }
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions {
-            image
-          }
+          pluginOptions
         }
       }
     `
