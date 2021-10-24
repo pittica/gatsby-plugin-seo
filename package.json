@@ -2,7 +2,7 @@
   "name": "@pittica/gatsby-plugin-seo",
   "private": false,
   "description": "SEO optimization plugin for GatsbyJS.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": {
     "name": "Lucio Benini",
     "email": "info@pittica.com",
@@ -38,7 +38,7 @@
   },
   "license": "MIT",
   "source": "src/index.jsx",
-  "main": "dist/index.jsx",
+  "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pittica/gatsby-plugin-seo.git"
