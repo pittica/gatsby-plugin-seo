@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/github/license/pittica/gatsby-plugin-seo)
 ![Version](https://img.shields.io/github/package-json/v/pittica/gatsby-plugin-seo)
 ![Release](https://img.shields.io/github/v/release/pittica/gatsby-plugin-seo)
-![Gatsby version](https://img.shields.io/github/package-json/dependency-version/pittica/gatsby-plugin-seo/gatsby)
+![Gatsby version](https://img.shields.io/npm/dependency-version/@pittica/gatsby-plugin-seo/peer/gatsby)
 ![React version](https://img.shields.io/github/package-json/dependency-version/pittica/gatsby-plugin-seo/react)
 
 ## Description
