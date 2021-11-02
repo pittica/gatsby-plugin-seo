@@ -1,8 +1,9 @@
 import React from "react"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
 import { formatLocale, joinLocale } from "@pittica/gatsby-plugin-utils"
+
+import useOptions from "../utils/useOptions"
 
 export default function OpenGraph({
   url,
@@ -13,48 +14,33 @@ export default function OpenGraph({
   locale,
 }) {
   const {
-    site: { siteMetadata },
-    sitePlugin: {
-      pluginOptions: {
-        socials: {
-          facebook: { app, page },
-        },
-      },
+    site,
+    defaultImage,
+    socials: {
+      facebook: { app, page },
     },
-  } = useStaticQuery(
-    graphql`
-      query OpenGraph {
-        site {
-          siteMetadata {
-            title
-            locale {
-              language
-              culture
-            }
-          }
-        }
-        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions
-        }
-      }
-    `
-  )
-  const localeContent = locale ? formatLocale(locale) : siteMetadata.locale
+  } = useOptions()
+  const localeContent = locale ? formatLocale(locale) : site.locale
 
   return (
     <Helmet>
       <meta property="og:url" content={url} />
-      {article ? <meta property="og:type" content="article" /> : null}
+      {article && <meta property="og:type" content="article" />}
       <meta property="og:title" content={title} />
       <meta property="og:locale" content={joinLocale(localeContent)} />
-      <meta property="og:description" content={description} />
-      <meta property="og:site_name" content={siteMetadata.title} />
-      {image ? <meta property="og:image" content={image} /> : null}
-      {app ? <meta property="fb:app_id" content={app} /> : null}
+      <meta
+        property="og:description"
+        content={description || site.description}
+      />
+      <meta property="og:site_name" content={site.title} />
+      {(image || defaultImage) && (
+        <meta property="og:image" content={image || defaultImage} />
+      )}
+      {app && <meta property="fb:app_id" content={app} />}
       {article && page ? (
         <meta
           property="article:publisher"
-          content={"https://www.facebook.com/" + page}
+          content={new URL(page, "https://www.facebook.com/").href}
         />
       ) : null}
     </Helmet>

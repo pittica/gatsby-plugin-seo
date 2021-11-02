@@ -1,35 +1,34 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 import { Helmet } from "react-helmet"
+
+import useOptions from "../utils/useOptions"
+import withUrl from "../utils/withUrl"
 
 export default function TwitterCard({ title, description, image }) {
   const {
-    sitePlugin: {
-      pluginOptions: {
-        socials: {
-          twitter: { site, username },
-        },
-      },
-    },
-  } = useStaticQuery(
-    graphql`
-      query TwitterCard {
-        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions
-        }
-      }
-    `
-  )
+    site,
+    defaultImage,
+    socials: { twitter },
+  } = useOptions()
 
   return (
     <Helmet>
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      {image ? <meta name="twitter:image" content={image} /> : null}
-      {site ? <meta name="twitter:site" content={site} /> : null}
-      {username ? <meta name="twitter:creator" content={username} /> : null}
+      {(image || defaultImage) && (
+        <meta
+          name="twitter:image"
+          content={withUrl(image, site.siteUrl) || defaultImage}
+        />
+      )}
+      {(twitter.site || twitter.username) && (
+        <meta name="twitter:site" content={twitter.site || twitter.username} />
+      )}
+      {twitter.username && (
+        <meta name="twitter:creator" content={twitter.username} />
+      )}
     </Helmet>
   )
 }

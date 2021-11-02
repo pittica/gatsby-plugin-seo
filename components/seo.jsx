@@ -1,11 +1,13 @@
 import React, { Fragment } from "react"
 import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
 
 import OpenGraph from "./open-graph"
 import TwitterCard from "./twitter-card"
 import SchemaOrg from "./schema-org"
+
+import useOptions from "../utils/useOptions"
+import withUrl from "../utils/withUrl"
 
 export default function Seo({
   postData,
@@ -19,51 +21,16 @@ export default function Seo({
   author,
   locale,
 }) {
-  const {
-    site: { siteMetadata },
-    sitePlugin: { pluginOptions },
-  } = useStaticQuery(
-    graphql`
-      query Seo {
-        site {
-          siteMetadata {
-            title
-            description
-            siteUrl
-            locale {
-              language
-              culture
-            }
-            author
-            organization {
-              company
-              url
-              logo
-            }
-          }
-        }
-        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions
-        }
-      }
-    `
-  )
+  const { site, defaultImage } = useOptions()
 
-  const siteUrl = siteMetadata.siteUrl.replace(/\/$/, "")
   const postMeta = frontmatter || postData.frontmatter || {}
-  const postTitle = title
-    ? title
-    : postMeta.title
-    ? postMeta.title
-    : siteMetadata.title
+  const postTitle = title ? title : postMeta.title ? postMeta.title : site.title
   const postDescription =
-    description || postMeta.description || siteMetadata.description
-  const postImage = image
-    ? `${siteUrl}/${image.replace(/^\//, "")}`
-    : `${siteUrl}/${pluginOptions.image.replace(/^\//, "")}`
-  const url = path ? new URL(path, siteUrl).href : siteUrl
+    description || postMeta.description || site.description
+  const postImage = image ? withUrl(image, site.siteUrl) : defaultImage
+  const url = withUrl(path, site.siteUrl)
   const datePublished = isBlogPost ? postMeta.datePublished : false
-  const postLocale = locale ? locale : siteMetadata.locale
+  const postLocale = locale ? locale : site.locale
 
   return (
     <Fragment>
@@ -72,9 +39,7 @@ export default function Seo({
           lang: postLocale.language,
         }}
         title={postTitle}
-        titleTemplate={
-          title ? `%s | ${siteMetadata.title}` : siteMetadata.title
-        }
+        titleTemplate={title ? `%s | ${site.title}` : site.title}
       >
         <meta name="description" content={postDescription} />
         {keywords && keywords.length > 0 && (
@@ -103,10 +68,10 @@ export default function Seo({
         image={postImage}
         description={postDescription}
         datePublished={datePublished}
-        siteUrl={siteMetadata.siteUrl}
-        author={author || siteMetadata.author}
-        organization={siteMetadata.organization}
-        defaultTitle={siteMetadata.title}
+        siteUrl={site.siteUrl}
+        author={author || site.author}
+        organization={site.organization}
+        defaultTitle={site.title}
       />
     </Fragment>
   )

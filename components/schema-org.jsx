@@ -15,7 +15,7 @@ function getOrganization({ url, logo, name }) {
   }
 }
 
-function SchemaOrg({
+export default function SchemaOrg({
   author,
   siteUrl,
   datePublished,
@@ -104,5 +104,3 @@ SchemaOrg.propTypes = {
 SchemaOrg.defaultProps = {
   isBlogPost: false,
 }
-
-export default React.memo(SchemaOrg)
