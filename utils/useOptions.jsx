@@ -29,38 +29,7 @@ export default function useOptions() {
           }
         }
         sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions {
-            image
-            socials {
-              facebook {
-                app
-                page
-                icon
-                show
-              }
-              github {
-                username
-                icon
-                show
-              }
-              instagram {
-                username
-                icon
-                show
-              }
-              linkedin {
-                page
-                icon
-                show
-              }
-              twitter {
-                username
-                site
-                icon
-                show
-              }
-            }
-          }
+          pluginOptions
         }
       }
     `
