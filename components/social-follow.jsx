@@ -11,53 +11,55 @@ export default function SocialFollow({ className }) {
   } = useOptions()
 
   return (
-    <div className={className}>
-      <ul className="social-follow">
-        {facebook && facebook.show && (
-          <SocialLink
-            name="Facebook"
-            icon={facebook.icon}
-            url="https://www.facebook.com/"
-            page={facebook.page}
-          />
-        )}
-        {instagram && instagram.show && (
-          <SocialLink
-            name="Instagram"
-            icon={instagram.icon}
-            url="https://instagram.com/"
-            page={instagram.username}
-          />
-        )}
-        {twitter && twitter.show && (
-          <SocialLink
-            name="Twitter"
-            icon={twitter.icon}
-            url="https://twitter.com/"
-            page={twitter.username}
-          />
-        )}
-        {linkedin && linkedin.show && (
-          <SocialLink
-            name="LinkedIn"
-            icon={linkedin.icon}
-            url="https://www.linkedin.com/company/"
-            page={linkedin.page}
-          />
-        )}
-        {github && github.show && (
-          <SocialLink
-            name="GitHub"
-            icon={github.icon}
-            url="https://github.com/"
-            page={github.username}
-          />
-        )}
-      </ul>
-    </div>
+    <ul className={className}>
+      {facebook && facebook.show && (
+        <SocialLink
+          name="Facebook"
+          icon={facebook.icon}
+          url="https://www.facebook.com/"
+          page={facebook.page}
+        />
+      )}
+      {instagram && instagram.show && (
+        <SocialLink
+          name="Instagram"
+          icon={instagram.icon}
+          url="https://instagram.com/"
+          page={instagram.username}
+        />
+      )}
+      {twitter && twitter.show && (
+        <SocialLink
+          name="Twitter"
+          icon={twitter.icon}
+          url="https://twitter.com/"
+          page={twitter.username}
+        />
+      )}
+      {linkedin && linkedin.show && (
+        <SocialLink
+          name="LinkedIn"
+          icon={linkedin.icon}
+          url="https://www.linkedin.com/company/"
+          page={linkedin.page}
+        />
+      )}
+      {github && github.show && (
+        <SocialLink
+          name="GitHub"
+          icon={github.icon}
+          url="https://github.com/"
+          page={github.username}
+        />
+      )}
+    </ul>
   )
 }
 
 SocialFollow.propTypes = {
   className: PropTypes.string,
+}
+
+SocialFollow.defaultProps = {
+  className: "social-follow",
 }
