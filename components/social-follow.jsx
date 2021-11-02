@@ -1,25 +1,14 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
 import PropTypes from "prop-types"
 
 import SocialLink from "./social-link"
 
+import useOptions from "../utils/useOptions"
+
 export default function SocialFollow({ className }) {
   const {
-    sitePlugin: {
-      pluginOptions: {
-        socials: { facebook, twitter, github, instagram, linkedin },
-      },
-    },
-  } = useStaticQuery(
-    graphql`
-      query SocialFollow {
-        sitePlugin(name: { eq: "@pittica/gatsby-plugin-seo" }) {
-          pluginOptions
-        }
-      }
-    `
-  )
+    socials: { facebook, twitter, github, instagram, linkedin },
+  } = useOptions()
 
   return (
     <div className={className}>
