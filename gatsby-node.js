@@ -71,6 +71,12 @@ exports.pluginOptionsSchema = ({ Joi }) => {
           )
           .default(true),
       }).default({ username: "", site: "", icon: "twitter", show: false }),
+    }).default({
+      instagram: { username: "", icon: "instagram", show: false },
+      github: { username: "", icon: "github", show: false },
+      facebook: { page: "", app: "", icon: "facebook", show: false },
+      linkedin: { page: "", icon: "linkedin", show: false },
+      twitter: { username: "", site: "", icon: "twitter", show: false }
     }),
     image: Joi.string().description(`Default image to share.`).default(""),
   })
