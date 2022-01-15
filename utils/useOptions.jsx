@@ -59,6 +59,11 @@ export default function useOptions() {
                 icon
                 show
               }
+              youtube {
+                username
+                icon
+                show
+              }
             }
           }
         }
