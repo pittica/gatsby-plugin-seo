@@ -84,14 +84,14 @@ exports.pluginOptionsSchema = ({ Joi }) => {
             `A value indicating whether the social network has to been displayed on social follow.`
           )
           .default(true),
-      }).default({ username: "", site: "", icon: "youtube", show: false }),
+      }).default({ username: "", icon: "youtube", show: false }),
     }).default({
       instagram: { username: "", icon: "instagram", show: false },
       github: { username: "", icon: "github", show: false },
       facebook: { page: "", app: "", icon: "facebook", show: false },
       linkedin: { page: "", icon: "linkedin", show: false },
       twitter: { username: "", site: "", icon: "twitter", show: false },
-      youtube: { username: "", site: "", icon: "youtube", show: false },
+      youtube: { username: "", icon: "youtube", show: false },
     }),
     image: Joi.string().description(`Default image to share.`).default(""),
   })
