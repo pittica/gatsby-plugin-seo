@@ -7,7 +7,7 @@ import useOptions from "../utils/useOptions"
 
 export default function SocialFollow({ className }) {
   const {
-    socials: { facebook, twitter, github, instagram, linkedin },
+    socials: { facebook, twitter, github, instagram, linkedin, youtube },
   } = useOptions()
 
   return (
@@ -50,6 +50,14 @@ export default function SocialFollow({ className }) {
           icon={github.icon}
           url="https://github.com/"
           page={github.username}
+        />
+      )}
+      {youtube && youtube.show && (
+        <SocialLink
+          name="YouTube"
+          icon={youtube.icon}
+          url="https://www.youtube.com/user/"
+          page={youtube.username}
         />
       )}
     </ul>
