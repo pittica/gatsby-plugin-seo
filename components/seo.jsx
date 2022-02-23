@@ -20,6 +20,8 @@ export default function Seo({
   keywords,
   author,
   locale,
+  next,
+  previous,
 }) {
   const { site, defaultImage } = useOptions()
 
@@ -47,6 +49,8 @@ export default function Seo({
         )}
         <meta name="image" content={postImage} />
         <link rel="canonical" href={url} />
+        {next && <link rel="next" href={next} />}
+        {previous && <link rel="prev" href={previous} />}
       </Helmet>
       <OpenGraph
         url={url}
@@ -88,6 +92,8 @@ Seo.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   locale: PropTypes.any,
+  next: PropTypes.string,
+  previous: PropTypes.string,
 }
 
 Seo.defaultProps = {
