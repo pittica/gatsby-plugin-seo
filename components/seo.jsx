@@ -49,8 +49,8 @@ export default function Seo({
         )}
         <meta name="image" content={postImage} />
         <link rel="canonical" href={url} />
-        {next && <link rel="next" href={next} />}
-        {previous && <link rel="prev" href={previous} />}
+        {next && <link rel="next" href={withUrl(next)} />}
+        {previous && <link rel="prev" href={withUrl(previous)} />}
       </Helmet>
       <OpenGraph
         url={url}
