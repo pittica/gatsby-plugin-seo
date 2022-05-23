@@ -6,6 +6,8 @@
 ![Gatsby version](https://img.shields.io/npm/dependency-version/@pittica/gatsby-plugin-seo/peer/gatsby)
 ![React version](https://img.shields.io/github/package-json/dependency-version/pittica/gatsby-plugin-seo/react)
 
+![Deprecated](https://img.shields.io/badge/DEPRECATED-Use%20master%20branch-red)
+
 ## Description
 
 SEO plugin for [GatsbyJS](https://www.gatsbyjs.org/).
@@ -71,4 +73,4 @@ module.exports = {
 
 ## Copyright
 
-(c) 2020-2021, [Pittica S.r.l.](https://pittica.com).
+(c) 2020-2022, [Pittica S.r.l.](https://pittica.com).
