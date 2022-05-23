@@ -1,9 +1,13 @@
-import React from "react"
-import { Helmet } from "react-helmet"
+import React, { useContext } from "react"
+import { Helmet } from "react-helmet-async"
 import PropTypes from "prop-types"
+
+import SocialContext from "../../context/social-context"
 
 function getOrganization({ url, logo, name }) {
   if (name) {
+    const { socials } = useContext(SocialContext)
+
     return {
       "@type": "Organization",
       url,

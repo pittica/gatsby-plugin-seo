@@ -1,13 +1,13 @@
-import React, { Fragment } from "react"
-import { Helmet } from "react-helmet"
+import React, { Fragment, useContext } from "react"
+import { Helmet } from "react-helmet-async"
 import PropTypes from "prop-types"
+import { withUrl } from "@pittica/gatsby-plugin-utils"
 
 import OpenGraph from "./open-graph"
 import TwitterCard from "./twitter-card"
-import SchemaOrg from "./schema-org"
+import SchemaOrg from "./ld-json/schema-org"
 
-import useOptions from "../utils/useOptions"
-import withUrl from "../utils/withUrl"
+import SocialContext from "../context/social-context"
 
 export default function Seo({
   postData,
@@ -23,59 +23,67 @@ export default function Seo({
   next,
   previous,
 }) {
-  const { site, defaultImage } = useOptions()
+  const context = useContext(SocialContext)
 
   const postMeta = frontmatter || postData.frontmatter || {}
-  const postTitle = title ? title : postMeta.title ? postMeta.title : site.title
-  const postDescription =
-    description || postMeta.description || site.description
-  const postImage = image ? withUrl(image, site.siteUrl) : defaultImage
-  const url = withUrl(path, site.siteUrl)
+  const postTitle = title
+    ? title
+    : postMeta.title
+    ? postMeta.title
+    : context.title
+  const postDescription = description || postMeta.description
+  const url = withUrl(path, context.siteUrl)
   const datePublished = isBlogPost ? postMeta.datePublished : false
-  const postLocale = locale ? locale : site.locale
+  const postLocale = locale ? locale : context.locale
 
   return (
     <Fragment>
       <Helmet
         htmlAttributes={{
-          lang: postLocale.language,
+          lang: postLocale?.language,
         }}
         title={postTitle}
-        titleTemplate={title ? `%s | ${site.title}` : site.title}
+        titleTemplate={title ? `%s | ${context.title}` : context.title}
       >
-        <meta name="description" content={postDescription} />
+        {postDescription && (
+          <meta name="description" content={postDescription} />
+        )}
         {keywords && keywords.length > 0 && (
           <meta name="keywords" content={keywords.join(", ")} />
         )}
-        <meta name="image" content={postImage} />
+        {image && (
+          <meta name="image" content={withUrl(image, context.siteUrl)} />
+        )}
         <link rel="canonical" href={url} />
-        {next && <link rel="next" href={withUrl(next, site.siteUrl)} />}
-        {previous && <link rel="prev" href={withUrl(previous, site.siteUrl)} />}
+        {next && <link rel="next" href={withUrl(next, context.siteUrl)} />}
+        {previous && (
+          <link rel="prev" href={withUrl(previous, context.siteUrl)} />
+        )}
       </Helmet>
       <OpenGraph
         url={url}
         article={isBlogPost}
         title={postTitle}
         description={postDescription}
-        image={postImage}
+        image={image}
         locale={postLocale}
       />
       <TwitterCard
         title={postTitle}
         description={postDescription}
-        image={postImage}
+        image={image}
       />
       <SchemaOrg
         isBlogPost={isBlogPost}
         url={url}
         title={postTitle}
-        image={postImage}
+        image={image}
         description={postDescription}
         datePublished={datePublished}
-        siteUrl={site.siteUrl}
-        author={author || site.author}
-        organization={site.organization}
-        defaultTitle={site.title}
+        siteUrl={context.siteUrl}
+        author={author || context.author}
+        organization={context.organization}
+        defaultTitle={context.title}
       />
     </Fragment>
   )

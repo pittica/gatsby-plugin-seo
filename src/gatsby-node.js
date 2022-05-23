@@ -1,4 +1,6 @@
-exports.pluginOptionsSchema = ({ Joi }) => {
+import { joinLocale } from "@pittica/gatsby-plugin-utils"
+
+export function pluginOptionsSchema({ Joi }) {
   return Joi.object({
     socials: Joi.object({
       instagram: Joi.object({
@@ -93,6 +95,32 @@ exports.pluginOptionsSchema = ({ Joi }) => {
       twitter: { username: "", site: "", icon: "twitter", show: false },
       youtube: { username: "", icon: "youtube", show: false },
     }),
+    title: Joi.string().description(`Default SEO title.`).default(""),
+    author: Joi.string().description(`Default author name.`).default(""),
+    description: Joi.string()
+      .description(`Default SEO description.`)
+      .default(""),
+    locale: Joi.object({
+      language: Joi.string().default("en").description(`Default language.`),
+      culture: Joi.string().default("").description(`Default culture.`),
+    })
+      .description(`Default locale.`)
+      .default({
+        language: "en",
+        culture: "US",
+      }),
+    siteUrl: Joi.string().description(`Site URL.`).required(),
     image: Joi.string().description(`Default image to share.`).default(""),
+    organization: Joi.object({
+      name: Joi.string().description(`Organization name.`).default(""),
+      url: Joi.string().description(`Organization URL.`).default(""),
+      logo: Joi.string().description(`Organization logo URL.`).default(""),
+    })
+      .description(`Organization data.`)
+      .default({
+        company: "",
+        url: "",
+        logo: "",
+      }),
   })
 }

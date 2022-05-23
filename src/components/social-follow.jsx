@@ -1,14 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
 
 import SocialLink from "./social-link"
-
-import useOptions from "../utils/useOptions"
+import SocialContext from "../context/social-context"
 
 export default function SocialFollow({ className }) {
-  const {
-    socials: { facebook, twitter, github, instagram, linkedin, youtube },
-  } = useOptions()
+  const { facebook, twitter, github, instagram, linkedin, youtube } =
+    useContext(SocialContext)
 
   return (
     <ul className={className}>

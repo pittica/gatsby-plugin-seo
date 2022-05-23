@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 export default function SocialLink({ name, icon, url, page }) {
   return (
     <li>
-      <a href={new URL(page, url).href} title={name}>
+      <a href={new URL(page, url).href} title={name} itemProp="sameAs">
         <i className={icon} />
         <span>{name}</span>
       </a>
