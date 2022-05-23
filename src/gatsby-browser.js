@@ -7,7 +7,7 @@ import Organization from "./components/ld-json/organization"
 
 export function wrapPageElement(
   { element, props: { location } },
-  { image, description, socials, siteUrl, title, locale, organization }
+  { image, description, socials, siteUrl, title, locale, organization, debug }
 ) {
   if (!organization.url) {
     organization.url = siteUrl
@@ -63,7 +63,7 @@ export function wrapPageElement(
           <meta name="twitter:creator" content={twitter.username} />
         )}
         {image && <meta name="twitter:image" content={image} />}
-        <base href={siteUrl} />
+        {!debug && <base href={siteUrl} />}
       </Helmet>
       <Organization organization={organization} socials={socials} />
       {element}

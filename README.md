@@ -74,6 +74,7 @@ module.exports = {
             icon: `linkedin-icon-class`,
             show: true,
           },
+          debug: false,
         },
       },
     },

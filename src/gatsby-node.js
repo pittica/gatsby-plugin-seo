@@ -122,5 +122,8 @@ export function pluginOptionsSchema({ Joi }) {
         url: "",
         logo: "",
       }),
+    debug: Joi.boolean()
+      .description(`Indicates whether the environment is debug.`)
+      .default(false),
   })
 }
