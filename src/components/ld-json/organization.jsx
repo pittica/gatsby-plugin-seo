@@ -35,14 +35,14 @@ export default function Organization({
 
   return (
     <Helmet>
-      <script type="application/ld+json">
+      <script type="application/ld+json" key="ld-json-organization">
         {JSON.stringify({
+          "@context": "http://schema.org",
           "@type": "Organization",
           url,
           name,
           logo: {
             url: logo,
-            "@context": "http://schema.org",
             "@type": "ImageObject",
           },
           sameAs,

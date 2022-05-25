@@ -4,6 +4,7 @@ import { joinLocale, formatLocale, withUrl } from "@pittica/gatsby-plugin-utils"
 
 import SocialContext from "./context/social-context"
 import Organization from "./components/ld-json/organization"
+import Website from "./components/ld-json/website"
 
 export function wrapPageElement(
   { element, props: { location } },
@@ -65,6 +66,7 @@ export function wrapPageElement(
         {image && <meta name="twitter:image" content={image} />}
         {!debug && <base href={siteUrl} />}
       </Helmet>
+      <Website url={siteUrl} description={description} name={title} />
       <Organization organization={organization} socials={socials} />
       {element}
     </Fragment>

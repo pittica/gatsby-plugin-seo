@@ -3,15 +3,13 @@ import { Helmet } from "react-helmet-async"
 import PropTypes from "prop-types"
 import { withUrl } from "@pittica/gatsby-plugin-utils"
 
+import SocialContext from "../context/social-context"
 import OpenGraph from "./open-graph"
 import TwitterCard from "./twitter-card"
-import SchemaOrg from "./ld-json/schema-org"
-
-import SocialContext from "../context/social-context"
+import Webpage from "./ld-json/webpage"
+import Breadcrumb from "./ld-json/breadcrumb"
 
 export default function Seo({
-  postData,
-  frontmatter,
   image,
   isBlogPost,
   title,
@@ -22,18 +20,14 @@ export default function Seo({
   locale,
   next,
   previous,
+  breadcrumb,
+  datePublished,
 }) {
   const context = useContext(SocialContext)
 
-  const postMeta = frontmatter || postData.frontmatter || {}
-  const postTitle = title
-    ? title
-    : postMeta.title
-    ? postMeta.title
-    : context.title
-  const postDescription = description || postMeta.description
+  const postTitle = title || context.title
+  const postDescription = description || context.description
   const url = withUrl(path, context.siteUrl)
-  const datePublished = isBlogPost ? postMeta.datePublished : false
   const postLocale = locale ? locale : context.locale
 
   return (
@@ -73,7 +67,7 @@ export default function Seo({
         description={postDescription}
         image={image}
       />
-      <SchemaOrg
+      <Webpage
         isBlogPost={isBlogPost}
         url={url}
         title={postTitle}
@@ -85,23 +79,29 @@ export default function Seo({
         organization={context.organization}
         defaultTitle={context.title}
       />
+      <Breadcrumb
+        url={url}
+        title={postTitle}
+        image={image}
+        items={breadcrumb}
+      />
     </Fragment>
   )
 }
 
 Seo.propTypes = {
-  isBlogPost: PropTypes.bool,
-  postData: PropTypes.shape({
-    childMarkdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.any,
-      excerpt: PropTypes.any,
-    }),
-  }),
-  image: PropTypes.string,
   title: PropTypes.string,
+  image: PropTypes.string,
+  path: PropTypes.string,
+  description: PropTypes.string,
+  keywords: PropTypes.arrayOf(PropTypes.string),
+  author: PropTypes.string,
+  isBlogPost: PropTypes.bool,
   locale: PropTypes.any,
   next: PropTypes.string,
   previous: PropTypes.string,
+  breadcrumb: PropTypes.array,
+  datePublished: PropTypes.string,
 }
 
 Seo.defaultProps = {
@@ -109,4 +109,5 @@ Seo.defaultProps = {
   postData: { childMarkdownRemark: {} },
   image: null,
   title: null,
+  breadcrumb: [],
 }

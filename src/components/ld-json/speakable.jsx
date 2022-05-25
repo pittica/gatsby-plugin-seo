@@ -6,7 +6,7 @@ export default function Speakable({ selector }) {
   if (selector.length > 0) {
     return (
       <Helmet>
-        <script type="application/ld+json">
+        <script type="application/ld+json" key="ld-json-speakable">
           {JSON.stringify({
             Speakable: {
               "@type": "SpeakableSpecification",
