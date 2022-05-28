@@ -2,7 +2,7 @@
   "name": "@pittica/gatsby-plugin-seo",
   "private": false,
   "description": "SEO optimization plugin for GatsbyJS.",
-  "version": "4.3.2",
+  "version": "4.3.3",
   "author": {
     "name": "Lucio Benini",
     "email": "info@pittica.com",
@@ -20,7 +20,7 @@
     "social-networks"
   ],
   "dependencies": {
-    "@pittica/gatsby-plugin-utils": "^2.3.0",
+    "@pittica/gatsby-plugin-utils": "^2.4.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

@@ -6,11 +6,13 @@ import { formatLocale, joinLocale, withUrl } from "@pittica/gatsby-plugin-utils"
 import SocialContext from "../context/social-context"
 
 export default function OpenGraph({
+  url,
   title,
   article,
   description,
   image,
   locale,
+  site,
 }) {
   const {
     socials: {
@@ -21,17 +23,40 @@ export default function OpenGraph({
 
   return (
     <Helmet>
-      {article && <meta property="og:type" content="article" />}
-      {title && <meta property="og:title" content={title} />}
-      {locale && (
-        <meta property="og:locale" content={joinLocale(formatLocale(locale))} />
+      {article && <meta property="og:type" content="article" key="og-type" />}
+      {url && (
+        <meta property="og:url" content={withUrl(url, siteUrl)} key="og-url" />
       )}
-      {description && <meta property="og:description" content={description} />}
-      {image && <meta property="og:image" content={withUrl(image, siteUrl)} />}
+      {title && <meta property="og:title" content={title} key="og-title" />}
+      {locale && (
+        <meta
+          property="og:locale"
+          content={joinLocale(formatLocale(locale))}
+          key="og-locale"
+        />
+      )}
+      {description && (
+        <meta
+          property="og:description"
+          content={description}
+          key="og-description"
+        />
+      )}
+      {image && (
+        <meta
+          property="og:image"
+          content={withUrl(image, siteUrl)}
+          key="og-image"
+        />
+      )}
+      {site && (
+        <meta property="og:site_name" content={site} key="og-site-name" />
+      )}
       {article && page ? (
         <meta
           property="article:publisher"
           content={withUrl(page, "https://www.facebook.com/")}
+          key="article-publisher"
         />
       ) : null}
     </Helmet>
@@ -39,11 +64,13 @@ export default function OpenGraph({
 }
 
 OpenGraph.propTypes = {
+  url: PropTypes.string,
   title: PropTypes.string,
   article: PropTypes.bool,
   image: PropTypes.string,
   description: PropTypes.string,
   locale: PropTypes.any,
+  site: PropTypes.string,
 }
 
 OpenGraph.defaultProps = {

@@ -5,6 +5,8 @@ import { joinLocale, formatLocale, withUrl } from "@pittica/gatsby-plugin-utils"
 import SocialContext from "./context/social-context"
 import Organization from "./components/ld-json/organization"
 import Website from "./components/ld-json/website"
+import TwitterCard from "./components/twitter-card"
+import OpenGraph from "./components/open-graph"
 
 export function wrapPageElement(
   { element, props: { location } },
@@ -31,41 +33,34 @@ export function wrapPageElement(
           lang: locale.language,
         }}
       >
-        {image && <meta name="image" content={image} />}
-        {facebook.app && <meta property="fb:app_id" content={facebook.app} />}
-        <meta
-          property="og:url"
-          content={location.href || withUrl(location.pathname, siteUrl)}
-        />
-        {title && <meta property="og:title" content={title} />}
-        {title && <meta property="og:site_name" content={title} />}
         {description && (
-          <meta property="og:description" content={description} />
-        )}
-        {locale && (
           <meta
-            property="og:locale"
-            content={joinLocale(formatLocale(locale))}
+            name="description"
+            content={description}
+            key="html-description"
           />
         )}
-        {image && <meta property="og:image" content={image} />}
-        <meta name="twitter:card" content="summary_large_image" />
-        {title && <meta name="twitter:title" content={title} />}
-        {description && (
-          <meta name="twitter:description" content={description} />
+        {image && <meta name="image" content={image} key="html-image" />}
+        {facebook.app && (
+          <meta property="fb:app_id" content={facebook.app} key="fb-app-id" />
         )}
-        {(twitter.site || twitter.username) && (
-          <meta
-            name="twitter:site"
-            content={twitter.site || twitter.username}
-          />
-        )}
-        {twitter.username && (
-          <meta name="twitter:creator" content={twitter.username} />
-        )}
-        {image && <meta name="twitter:image" content={image} />}
         {!debug && <base href={siteUrl} />}
       </Helmet>
+      <OpenGraph
+        url={location.href || withUrl(location.pathname, siteUrl)}
+        title={title}
+        description={description}
+        image={image}
+        locale={locale}
+        site={title}
+      />
+      <TwitterCard
+        title={title}
+        description={description}
+        image={image}
+        username={twitter.username}
+        site={twitter.site || twitter.username}
+      />
       <Website url={siteUrl} description={description} name={title} />
       <Organization organization={organization} socials={socials} />
       {element}

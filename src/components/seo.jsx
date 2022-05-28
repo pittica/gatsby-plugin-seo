@@ -40,18 +40,40 @@ export default function Seo({
         titleTemplate={title ? `%s | ${context.title}` : context.title}
       >
         {postDescription && (
-          <meta name="description" content={postDescription} />
+          <meta
+            name="description"
+            content={postDescription}
+            key="html-description"
+          />
         )}
         {keywords && keywords.length > 0 && (
-          <meta name="keywords" content={keywords.join(", ")} />
+          <meta
+            name="keywords"
+            content={keywords.join(", ")}
+            key="html-keywords"
+          />
         )}
         {image && (
-          <meta name="image" content={withUrl(image, context.siteUrl)} />
+          <meta
+            name="image"
+            content={withUrl(image, context.siteUrl)}
+            key="html-image"
+          />
         )}
-        <link rel="canonical" href={url} />
-        {next && <link rel="next" href={withUrl(next, context.siteUrl)} />}
+        <link rel="canonical" href={url} key="html-canonical" />
+        {next && (
+          <link
+            rel="next"
+            href={withUrl(next, context.siteUrl)}
+            key="html-next"
+          />
+        )}
         {previous && (
-          <link rel="prev" href={withUrl(previous, context.siteUrl)} />
+          <link
+            rel="prev"
+            href={withUrl(previous, context.siteUrl)}
+            key="html-previous"
+          />
         )}
       </Helmet>
       <OpenGraph
