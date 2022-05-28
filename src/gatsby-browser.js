@@ -1,6 +1,6 @@
 import React, { Fragment } from "react"
 import { Helmet, HelmetProvider } from "react-helmet-async"
-import { joinLocale, formatLocale, withUrl } from "@pittica/gatsby-plugin-utils"
+import { withUrl } from "@pittica/gatsby-plugin-utils"
 
 import SocialContext from "./context/social-context"
 import Organization from "./components/ld-json/organization"
