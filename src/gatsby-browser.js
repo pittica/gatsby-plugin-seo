@@ -40,7 +40,13 @@ export function wrapPageElement(
             key="html-description"
           />
         )}
-        {image && <meta name="image" content={image} key="html-image" />}
+        {image && (
+          <meta
+            name="image"
+            content={withUrl(image, siteUrl)}
+            key="html-image"
+          />
+        )}
         {facebook.app && (
           <meta property="fb:app_id" content={facebook.app} key="fb-app-id" />
         )}
