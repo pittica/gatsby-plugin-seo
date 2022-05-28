@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { Fragment, useContext } from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet-async"
 import { formatLocale, joinLocale, withUrl } from "@pittica/gatsby-plugin-utils"
@@ -43,11 +43,20 @@ export default function OpenGraph({
         />
       )}
       {image && (
-        <meta
-          property="og:image"
-          content={withUrl(image, siteUrl)}
-          key="og-image"
-        />
+        <Fragment>
+          <meta
+            property="og:image"
+            content={withUrl(image, siteUrl)}
+            key="og-image"
+          />
+          {description && (
+            <meta
+              name="og:image:alt"
+              content={description}
+              key="og-image-alternative"
+            />
+          )}
+        </Fragment>
       )}
       {site && (
         <meta property="og:site_name" content={site} key="og-site-name" />
