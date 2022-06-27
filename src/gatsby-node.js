@@ -125,6 +125,10 @@ export function pluginOptionsSchema({ Joi }) {
       description: Joi.string()
         .description(`Description field.`)
         .default("post.description"),
+      next: Joi.string().description(`Next path field.`).default("next.path"),
+      previous: Joi.string()
+        .description(`Previous path field.`)
+        .default("previous.path"),
       image: Joi.string().description(`Image field.`).default("post.image"),
       imageFallback: Joi.string()
         .description(`Image fallback field.`)

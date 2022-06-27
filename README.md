@@ -77,6 +77,8 @@ module.exports = {
           fields: {
             title: `post.title`,
             description: `post.description`,
+            next: `next.path`,
+            previous: `previous.path`,
             image: `post.image`,
             imageFallback: `post.image`,
           }

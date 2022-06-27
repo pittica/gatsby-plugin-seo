@@ -8,6 +8,8 @@ import OpenGraph from "./open-graph"
 import TwitterCard from "./twitter-card"
 import Webpage from "./ld-json/webpage"
 import Breadcrumb from "./ld-json/breadcrumb"
+import Links from "./links"
+import PageMeta from "./page-meta"
 
 export default function Seo({
   image,
@@ -39,13 +41,6 @@ export default function Seo({
         title={postTitle}
         titleTemplate={title ? `%s | ${context.title}` : context.title}
       >
-        {postDescription && (
-          <meta
-            name="description"
-            content={postDescription}
-            key="html-description"
-          />
-        )}
         {keywords && keywords.length > 0 && (
           <meta
             name="keywords"
@@ -53,29 +48,9 @@ export default function Seo({
             key="html-keywords"
           />
         )}
-        {image && (
-          <meta
-            name="image"
-            content={withUrl(image, context.siteUrl)}
-            key="html-image"
-          />
-        )}
-        <link rel="canonical" href={url} key="html-canonical" />
-        {next && (
-          <link
-            rel="next"
-            href={withUrl(next, context.siteUrl)}
-            key="html-next"
-          />
-        )}
-        {previous && (
-          <link
-            rel="prev"
-            href={withUrl(previous, context.siteUrl)}
-            key="html-previous"
-          />
-        )}
       </Helmet>
+      <PageMeta siteUrl={siteUrl} description={postDescription} image={image} />
+      <Links siteUrl={siteUrl} path={path} next={next} previous={previous} />
       <OpenGraph
         url={url}
         article={isBlogPost}
@@ -128,7 +103,6 @@ Seo.propTypes = {
 
 Seo.defaultProps = {
   isBlogPost: false,
-  postData: { childMarkdownRemark: {} },
   image: null,
   title: null,
   breadcrumb: [],
