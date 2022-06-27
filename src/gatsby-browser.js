@@ -7,10 +7,22 @@ import Organization from "./components/ld-json/organization"
 import Website from "./components/ld-json/website"
 import TwitterCard from "./components/twitter-card"
 import OpenGraph from "./components/open-graph"
+import extract from "./utils/extract"
 
 export function wrapPageElement(
-  { element, props: { location } },
-  { image, description, socials, siteUrl, title, locale, organization, debug }
+  { element, props: { location, data } },
+  {
+    image,
+    description,
+    socials,
+    siteUrl,
+    title,
+    locale,
+    organization,
+    fields,
+    resolve,
+    debug,
+  }
 ) {
   if (!organization.url) {
     organization.url = siteUrl
@@ -25,6 +37,7 @@ export function wrapPageElement(
   }
 
   const { facebook, twitter } = socials
+  const seo = extract(data, { title, description, image, fields, resolve })
 
   return (
     <Fragment>
@@ -33,17 +46,17 @@ export function wrapPageElement(
           lang: locale.language,
         }}
       >
-        {description && (
+        {seo.description && (
           <meta
             name="description"
-            content={description}
+            content={seo.description}
             key="html-description"
           />
         )}
-        {image && (
+        {seo.image && (
           <meta
             name="image"
-            content={withUrl(image, siteUrl)}
+            content={withUrl(seo.image, siteUrl)}
             key="html-image"
           />
         )}
@@ -54,16 +67,16 @@ export function wrapPageElement(
       </Helmet>
       <OpenGraph
         url={location.href || withUrl(location.pathname, siteUrl)}
-        title={title}
-        description={description}
-        image={image}
+        title={seo.title}
+        description={seo.description}
+        image={seo.image}
         locale={locale}
         site={title}
       />
       <TwitterCard
-        title={title}
-        description={description}
-        image={image}
+        title={seo.title}
+        description={seo.description}
+        image={seo.image}
         username={twitter.username}
         site={twitter.site || twitter.username}
       />

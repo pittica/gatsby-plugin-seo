@@ -1,5 +1,3 @@
-import { joinLocale } from "@pittica/gatsby-plugin-utils"
-
 export function pluginOptionsSchema({ Joi }) {
   return Joi.object({
     socials: Joi.object({
@@ -122,6 +120,22 @@ export function pluginOptionsSchema({ Joi }) {
         url: "",
         logo: "",
       }),
+    fields: Joi.object({
+      title: Joi.string().description(`Title field.`).default("post.title"),
+      description: Joi.string()
+        .description(`Description field.`)
+        .default("post.description"),
+      image: Joi.string().description(`Image field.`).default("post.image"),
+      imageFallback: Joi.string()
+        .description(`Image fallback field.`)
+        .default("post.image"),
+    })
+      .default({
+        title: "post.title",
+        description: "post.description",
+        image: "post.image",
+      })
+      .description(`Field in data properties that represents a post.`),
     debug: Joi.boolean()
       .description(`Indicates whether the environment is debug.`)
       .default(false),

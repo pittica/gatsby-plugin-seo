@@ -74,6 +74,12 @@ module.exports = {
             icon: `linkedin-icon-class`,
             show: true,
           },
+          fields: {
+            title: `post.title`,
+            description: `post.description`,
+            image: `post.image`,
+            imageFallback: `post.image`,
+          }
           debug: false,
         },
       },
