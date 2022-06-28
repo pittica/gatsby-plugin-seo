@@ -4,16 +4,28 @@ import PropTypes from "prop-types"
 import { withUrl } from "@pittica/gatsby-plugin-utils"
 
 export default function PageMeta({ siteUrl, description, image }) {
-  return (
-    <Helmet>
-      {description && (
-        <meta name="description" content={description} key="html-description" />
-      )}
-      {image && (
-        <meta name="image" content={withUrl(image, siteUrl)} key="html-image" />
-      )}
-    </Helmet>
-  )
+  if (description || image) {
+    return (
+      <Helmet>
+        {description && (
+          <meta
+            name="description"
+            content={description}
+            key="html-description"
+          />
+        )}
+        {image && (
+          <meta
+            name="image"
+            content={withUrl(image, siteUrl)}
+            key="html-image"
+          />
+        )}
+      </Helmet>
+    )
+  } else {
+    return null
+  }
 }
 
 PageMeta.propTypes = {

@@ -62,7 +62,7 @@ export function wrapPageElement(
       />
       <Links
         siteUrl={siteUrl}
-        path={location.href || withUrl(location.pathname, siteUrl)}
+        path={location.href || location.pathname}
         next={searchArray(fields.next, data)}
         previous={searchArray(fields.previous, data)}
       />
