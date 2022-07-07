@@ -49,8 +49,8 @@ export default function Seo({
           />
         )}
       </Helmet>
-      <PageMeta siteUrl={siteUrl} description={postDescription} image={image} />
-      <Links siteUrl={siteUrl} path={path} next={next} previous={previous} />
+      <PageMeta siteUrl={context.siteUrl} description={postDescription} image={image} />
+      <Links siteUrl={context.siteUrl} path={path} next={next} previous={previous} />
       <OpenGraph
         url={url}
         article={isBlogPost}
