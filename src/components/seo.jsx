@@ -39,7 +39,13 @@ export default function Seo({
           lang: postLocale?.language,
         }}
         title={postTitle}
-        titleTemplate={title ? `%s | ${context.title}` : context.title}
+        titleTemplate={
+          title != context.title
+            ? postTitle
+              ? `%s | ${context.title}`
+              : context.title
+            : null
+        }
       >
         {keywords && keywords.length > 0 && (
           <meta
@@ -49,8 +55,17 @@ export default function Seo({
           />
         )}
       </Helmet>
-      <PageMeta siteUrl={context.siteUrl} description={postDescription} image={image} />
-      <Links siteUrl={context.siteUrl} path={path} next={next} previous={previous} />
+      <PageMeta
+        siteUrl={context.siteUrl}
+        description={postDescription}
+        image={image}
+      />
+      <Links
+        siteUrl={context.siteUrl}
+        path={path}
+        next={next}
+        previous={previous}
+      />
       <OpenGraph
         url={url}
         article={isBlogPost}

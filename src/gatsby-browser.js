@@ -48,7 +48,9 @@ export function wrapPageElement(
           lang: locale.language,
         }}
         title={seo.title || title}
-        titleTemplate={seo.title ? `%s | ${title}` : title}
+        titleTemplate={
+          seo.title != title ? (seo.title ? `%s | ${title}` : title) : null
+        }
       >
         {facebook.app && (
           <meta property="fb:app_id" content={facebook.app} key="fb-app-id" />
